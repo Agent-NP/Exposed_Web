@@ -1,0 +1,12 @@
+.popup_parent{
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    background-color: rgb(87, 87, 87, 0.5);
+}
+
+@media (min-width: 1024px) {
+    .popup{
+        width: 50%;
+    }
+}

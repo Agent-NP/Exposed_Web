@@ -5,5 +5,12 @@
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  color: white;
 }
+
+
+@media (min-width: 768px) {
+  .matchBox{
+    height: 300px;
+  }
+}
+
