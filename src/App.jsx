@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import io from "socket.io-client";
 import { Context } from "./utils/Context";
+import Loader from "./components/Loader";
 
 const Home = lazy(() => import("./pages/Home"));
 const Live = lazy(() => import("./pages/Live"));
@@ -21,7 +22,9 @@ function App() {
   };
   useEffect(() => {
     async function connectToServer() {
-      const connector = await io.connect("https://exposed-scraper.onrender.com/");
+      const connector = await io.connect(
+        "https://exposed-scraper.onrender.com/"
+      );
       return connector;
     }
     const connector = connectToServer();
@@ -33,7 +36,7 @@ function App() {
   return (
     <Context.Provider value={{ currentPage, updateCurrentPage }}>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader />}>
           <div className="d-flex flex-fill flex-column">
             <div>
               <Navbar />
