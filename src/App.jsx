@@ -21,7 +21,7 @@ function App() {
   };
   useEffect(() => {
     async function connectToServer() {
-      const connector = await io.connect("http://127.0.0.1:3001");
+      const connector = await io.connect("https://exposed-scraper.onrender.com/");
       return connector;
     }
     const connector = connectToServer();
