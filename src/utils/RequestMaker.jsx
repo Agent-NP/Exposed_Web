@@ -1,5 +1,6 @@
 import axios from "axios";
 const root_url = "https://exposed-scraper.onrender.com/api";
+// const root_url = "http://127.0.0.1:3001/api";
 
 async function getData(route) {
   const data = await axios

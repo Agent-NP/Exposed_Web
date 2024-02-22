@@ -14,24 +14,27 @@ const Today = lazy(() => import("./pages/Today"));
 const Yesterday = lazy(() => import("./pages/Yesterday"));
 const Ended = lazy(() => import("./pages/Ended"));
 
+const socket = io.connect("http://127.0.0.1:3001");
+
 function App() {
-  const [socket, setSocket] = useState(null);
   const [currentPage, setCurrentPage] = useState("");
   const updateCurrentPage = page => {
     setCurrentPage(page);
   };
   useEffect(() => {
-    async function connectToServer() {
-      const connector = await io.connect(
-        "https://exposed-scraper.onrender.com/"
-      );
-      return connector;
+    if (socket != undefined) {
+      socket.on("live_football_update", update => {
+        console.log("hello");
+        console.log(update);
+      });
     }
-    const connector = connectToServer();
-    if (connector.connected) {
-      console.log("connected to the server");
-      setSocket(connector);
-    }
+
+    return () => {
+      // Cleanup function to disconnect from the socket on component unmount
+      if (socket != undefined) {
+        socket.disconnect();
+      }
+    };
   }, []);
   return (
     <Context.Provider value={{ currentPage, updateCurrentPage }}>
